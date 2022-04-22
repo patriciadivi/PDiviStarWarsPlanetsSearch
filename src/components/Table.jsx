@@ -5,6 +5,8 @@ function Table() {
   const {
     getfetchPlanetlist,
     planetlist,
+    inputValue,
+    setHandleChange,
   } = useContext(contextPlanetList);
 
   useEffect(() => {
@@ -13,10 +15,18 @@ function Table() {
   }, []);
 
   const { results } = planetlist;
+  const { valueInput } = inputValue;
 
   // useEffect(() => {
-  //   console.log('planetlist', planetlist);
-  // }, [planetlist]);
+  //   console.log('results', results);
+  // }, [planetlist, results]);
+
+  useEffect(() => {
+    if (!valueInput) {
+      setHandleChange({ valueInput: '' });
+    }
+    console.log('valueInput', valueInput);
+  }, [setHandleChange, valueInput]);
 
   return (
     <table name="">
@@ -39,23 +49,29 @@ function Table() {
       </thead>
 
       <tbody>
-        {results?.map((planet) => (
-          <tr key={ planet.name }>
-            <td>{ planet.name }</td>
-            <td>{ planet.rotation_period }</td>
-            <td>{ planet.orbital_period }</td>
-            <td>{ planet.diameter }</td>
-            <td>{ planet.climate }</td>
-            <td>{ planet.gravity }</td>
-            <td>{ planet.terrain }</td>
-            <td>{ planet.surface_water}</td>
-            <td>{ planet.population }</td>
-            <td>{ planet.films }</td>
-            <td>{ planet.created }</td>
-            <td>{ planet.edited }</td>
-            <td>{ planet.url }</td>
-          </tr>
-        ))}
+        {
+           results?.filter((planet) => planet.name.toLowerCase()
+             .includes(valueInput.toLowerCase()))
+             .map((planet) => (
+               <tr key={ planet.name }>
+
+                 { console.log(valueInput) }
+                 <td>{planet.name}</td>
+                 <td>{ planet.rotation_period }</td>
+                 <td>{ planet.orbital_period }</td>
+                 <td>{ planet.diameter }</td>
+                 <td>{ planet.climate }</td>
+                 <td>{ planet.gravity }</td>
+                 <td>{ planet.terrain }</td>
+                 <td>{ planet.surface_water}</td>
+                 <td>{ planet.population }</td>
+                 <td>{ planet.films }</td>
+                 <td>{ planet.created }</td>
+                 <td>{ planet.edited }</td>
+                 <td>{ planet.url }</td>
+               </tr>
+             ))
+        }
       </tbody>
     </table>
 

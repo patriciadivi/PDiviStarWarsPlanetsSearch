@@ -6,6 +6,12 @@ import fetchPlanetlist from '../services/Api';
 function Provider({ children }) {
   const [planetlist, setFetchPlanetlist] = useState({}); // [state, setter]
   const [loading, setLoading] = useState(false);
+  const [inputValue, setHandleChange] = useState('');
+
+  // useEffect(() => {
+  //   console.log(valeuInput);
+  // }, [valeuInput]);
+  // MARAVILHA!
 
   const getfetchPlanetlist = async () => {
     setLoading(true);
@@ -19,6 +25,8 @@ function Provider({ children }) {
     planetlist,
     getfetchPlanetlist,
     loading,
+    inputValue,
+    setHandleChange,
   };
 
   return (
