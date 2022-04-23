@@ -6,7 +6,7 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <Provider valeu={ contextPlanetList }>
+    <Provider value={ contextPlanetList }>
       <Home />
     </Provider>
   );

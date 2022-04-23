@@ -4,9 +4,14 @@ import contextPlanetList from './contextPlanetList';
 import fetchPlanetlist from '../services/Api';
 
 function Provider({ children }) {
-  const [planetlist, setFetchPlanetlist] = useState({}); // [state, setter]
+  const [results, setFetchPlanetlist] = useState([]); // [state, setter]
   const [loading, setLoading] = useState(false);
   const [inputValue, setHandleChange] = useState('');
+  const [filterOrder, setFilterOrder] = useState({
+    columnOrder: 'population',
+    comparisonOrder: 'maior que',
+    valueOrder: '0',
+  });
 
   // useEffect(() => {
   //   console.log(valeuInput);
@@ -17,16 +22,19 @@ function Provider({ children }) {
     setLoading(true);
     const resultPlanetlist = await fetchPlanetlist();
     // console.log('resultPlanetlist', resultPlanetlist);
-    setFetchPlanetlist(resultPlanetlist);
+    setFetchPlanetlist(resultPlanetlist.results);
     setLoading(false);
   };
 
   const contextValue = {
-    planetlist,
+    results,
     getfetchPlanetlist,
+    setFetchPlanetlist,
     loading,
     inputValue,
     setHandleChange,
+    filterOrder,
+    setFilterOrder,
   };
 
   return (
@@ -40,5 +48,4 @@ export default Provider;
 
 Provider.propTypes = {
   children: propTypes.node.isRequired,
-  // setState: PropTypes.func.isRequired,
 };

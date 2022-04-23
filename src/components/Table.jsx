@@ -4,7 +4,7 @@ import contextPlanetList from '../context/contextPlanetList';
 function Table() {
   const {
     getfetchPlanetlist,
-    planetlist,
+    results,
     inputValue,
     setHandleChange,
   } = useContext(contextPlanetList);
@@ -14,7 +14,6 @@ function Table() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { results } = planetlist;
   const { valueInput } = inputValue;
 
   // useEffect(() => {
@@ -22,10 +21,14 @@ function Table() {
   // }, [planetlist, results]);
 
   useEffect(() => {
+    console.log(results);
+  }, [results]);
+
+  useEffect(() => {
     if (!valueInput) {
       setHandleChange({ valueInput: '' });
     }
-    console.log('valueInput', valueInput);
+    // console.log('valueInput', valueInput);
   }, [setHandleChange, valueInput]);
 
   return (
@@ -54,8 +57,7 @@ function Table() {
              .includes(valueInput.toLowerCase()))
              .map((planet) => (
                <tr key={ planet.name }>
-
-                 { console.log(valueInput) }
+                 {/* { console.log(valueInput) } */}
                  <td>{planet.name}</td>
                  <td>{ planet.rotation_period }</td>
                  <td>{ planet.orbital_period }</td>
@@ -79,65 +81,3 @@ function Table() {
 }
 
 export default Table;
-
-// <table className="table">
-//   <thead>
-//     <tr>
-//       <th>Coluna</th>
-//     </tr>
-//     <select>
-//       <option value="population">population</option>
-//       <option value="orbinal_period">orbinal_period</option>
-//       <option value="diameter">diameter</option>
-//       <option value="rotation_period">rotation_period</option>
-//       <option value="surface_water">surface_water</option>
-//     </select>
-//     <tr>
-//       <th>Operador</th>
-//     </tr>
-//     <select name="" id="">
-//       <option value="menor">menor que</option>
-//       <option value="mais">mais que</option>
-//       <option value="igua">igua a</option>
-//     </select>
-//     <input type="number" id="tableNumber" name="tableName" />
-//     <button
-//       type="button"
-//     >
-//       Filtrar
-//     </button>
-//     <tr>
-//       <th>Ordenar</th>
-//     </tr>
-//     <select>
-//       <option value="population">population</option>
-//       <option value="orbinal_period">orbinal_period</option>
-//       <option value="diameter">diameter</option>
-//       <option value="rotation_period">rotation_period</option>
-//       <option value="surface_water">surface_water</option>
-//     </select>
-//     <tr>
-//       <label htmlFor="AscendenteId">
-//         <input type="radio" id="AscendenteId" name="tableAscendenteName" />
-//         Ascendente
-//       </label>
-//       <label htmlFor="DescendenteId">
-//         <input type="radio" id="DescendenteId" name="tableDescendente" />
-//         Descendente
-//       </label>
-//       <button
-//         type="button"
-//       >
-//         Ordenar
-//       </button>
-//     </tr>
-//   </thead>
-//   {/* <tbody>
-//     {props.data.map((person, index) => (
-//       <tr key={index}>
-//         <td>{person.name}</td>
-//         <td>{person.job}</td>
-//       </tr>
-//     ))}
-//   </tbody> */}
-// </table>
