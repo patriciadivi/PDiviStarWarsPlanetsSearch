@@ -4,14 +4,26 @@ import contextPlanetList from './contextPlanetList';
 import fetchPlanetlist from '../services/Api';
 
 function Provider({ children }) {
+  // Fetch API
   const [results, setFetchPlanetlist] = useState([]); // [state, setter]
+  // Loading Page
   const [loading, setLoading] = useState(false);
+  // Filter Pelo Nome
   const [inputValue, setHandleChange] = useState('');
+  // Filter Pela comparação
   const [filterOrder, setFilterOrder] = useState({
     columnOrder: 'population',
     comparisonOrder: 'maior que',
     valueOrder: '0',
   });
+  // delete option já selecionadas
+  const [filterOptionStarWars, setOptionStarWars] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   // useEffect(() => {
   //   console.log(valeuInput);
@@ -35,6 +47,8 @@ function Provider({ children }) {
     setHandleChange,
     filterOrder,
     setFilterOrder,
+    filterOptionStarWars,
+    setOptionStarWars,
   };
 
   return (

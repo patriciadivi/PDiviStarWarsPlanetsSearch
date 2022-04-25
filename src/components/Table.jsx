@@ -21,10 +21,6 @@ function Table() {
   // }, [planetlist, results]);
 
   useEffect(() => {
-    console.log(results);
-  }, [results]);
-
-  useEffect(() => {
     if (!valueInput) {
       setHandleChange({ valueInput: '' });
     }

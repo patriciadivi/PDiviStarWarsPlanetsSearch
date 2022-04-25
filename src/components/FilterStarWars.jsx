@@ -4,8 +4,8 @@ import contextPlanetList from '../context/contextPlanetList';
 export default function FilterStarWars() {
   const {
     setFetchPlanetlist, results,
-
     filterOrder, setFilterOrder,
+    filterOptionStarWars, setOptionStarWars,
   } = useContext(contextPlanetList);
 
   const { columnOrder, comparisonOrder, valueOrder } = filterOrder;
@@ -17,18 +17,23 @@ export default function FilterStarWars() {
   // });
 
   // useEffect(() => {
-  //   console.log('filterOrder', filterOrder);
-  // }, [filterOrder, filterOrder.columnOrder, filterOrder.comparisonOrder, filterOrder.valueOrder]);
+  //   const testFilterOrder = () => {
+  //     console.log('filterOptionStarWars', filterOptionStarWars);
+  //     // console.log('setOptionStarWars', setOptionStarWars);
+  //   };
+  //   testFilterOrder();
+  // }, [filterOptionStarWars, setOptionStarWars]);
 
   const handleChangeFilters = ({ target: { name, value } }) => {
     setFilterOrder({ ...filterOrder, [name]: value });
   };
 
   const handleClickFilters = () => {
+    setOptionStarWars(filterOptionStarWars
+      .filter((opition) => opition !== columnOrder));
+
     switch (comparisonOrder) {
     case 'maior que':
-      // console.log('columnOrder', columnOrder);
-      // console.log(results.filter((planet) => +planet.orbital_period > +valueOrder));
       return setFetchPlanetlist(results
         .filter((planet) => +planet[columnOrder] > +valueOrder));
     case 'menor que':
@@ -51,11 +56,18 @@ export default function FilterStarWars() {
           id="column"
           onChange={ handleChangeFilters }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+
+          {
+            filterOptionStarWars.map((opition) => (
+              <option
+                key={ opition }
+                value={ opition }
+              >
+                { opition }
+              </option>
+            ))
+          }
+
         </select>
       </label>
 
